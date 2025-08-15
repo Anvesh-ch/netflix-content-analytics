@@ -1,0 +1,15 @@
+database:
+  host: localhost
+  port: 5432
+  database: netflix_db
+  user: postgres
+  password: 
+
+data:
+  raw_csv: data/raw/netflix_titles.csv
+  processed_dir: data/processed
+  bi_exports_dir: data/processed/bi_exports
+
+analysis:
+  output_format: csv
+  include_visualizations: true
