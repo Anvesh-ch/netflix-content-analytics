@@ -1,15 +1,15 @@
 # Netflix Content Analytics
 
-A comprehensive data analytics project that analyzes Netflix's global content library to identify genre trends, rating distributions, and release patterns. Built with PostgreSQL, Python, and Power BI for strategic content insights.
+A comprehensive data analytics project that analyzes Netflix's global content library to identify genre trends, rating distributions, and release patterns. Built with PostgreSQL, Python, and Tableau Public for strategic content insights.
 
 ## Project Overview
 
-This project provides an end-to-end solution for analyzing Netflix content data, from raw CSV ingestion to interactive Power BI dashboards. It answers key business questions about content strategy, audience preferences, and operational performance.
+This project provides an end-to-end solution for analyzing Netflix content data, from raw CSV ingestion to interactive Tableau Public dashboards. It answers key business questions about content strategy, audience preferences, and operational performance.
 
 ### Key Features
 - **Data Pipeline**: Automated loading of Netflix titles dataset into PostgreSQL
 - **SQL Analysis**: Comprehensive content analysis using advanced SQL queries
-- **Power BI Dashboard**: Interactive visualizations for strategic insights
+- **Tableau Dashboard**: Interactive visualizations for strategic insights
 - **Data Quality**: Robust validation and cleaning processes
 - **Reproducible**: Complete automation from data to insights
 
@@ -28,7 +28,7 @@ This project provides an end-to-end solution for analyzing Netflix content data,
 - **Python 3.11**: Data processing and automation
 - **PostgreSQL 15**: Data storage and analysis
 - **Docker**: Containerized database setup
-- **Power BI**: Interactive dashboard creation
+- **Tableau Public**: Interactive dashboard creation
 - **Pandas & SQLAlchemy**: Data manipulation and database operations
 - **PyTest**: Testing and validation
 
@@ -36,8 +36,8 @@ This project provides an end-to-end solution for analyzing Netflix content data,
 
 ### Prerequisites
 - Python 3.11+
-- Docker and Docker Compose
-- Power BI Desktop (for dashboard creation)
+- PostgreSQL (local installation)
+- Tableau Public (free download from tableau.com)
 
 ### 1. Clone and Setup
 ```bash
@@ -46,9 +46,9 @@ cd netflix-content-analytics
 pip install -r requirements.txt
 ```
 
-### 2. Start PostgreSQL Database
+### 2. Setup PostgreSQL Database
 ```bash
-docker-compose up -d
+createdb netflix_db
 ```
 
 ### 3. Load Data and Run Analysis
@@ -59,15 +59,15 @@ python src/00_load_to_postgres.py
 # Run content analysis
 python src/01_run_analysis.py
 
-# Export data for Power BI
-python src/02_export_for_powerbi.py
+# Export data for Tableau
+python src/02_export_for_tableau.py
 ```
 
-### 4. Build Power BI Dashboard
-1. Open Power BI Desktop
-2. Import CSV files from `data/processed/bi_exports/`
-3. Follow the build guide in `docs/powerbi_build_guide.md`
-4. Save dashboard as `.pbix` file
+### 4. Build Tableau Dashboard
+1. Download Tableau Public from tableau.com
+2. Import CSV files from `data/processed/tableau_exports/`
+3. Follow the build guide in `docs/tableau_build_guide.md`
+4. Publish to Tableau Public for portfolio sharing
 
 ## Project Structure
 
@@ -75,31 +75,31 @@ python src/02_export_for_powerbi.py
 netflix-content-analytics/
 ├── README.md                 # This file
 ├── requirements.txt          # Python dependencies
-├── docker-compose.yml        # PostgreSQL setup
+├── docker-compose.yml        # PostgreSQL setup (optional)
 ├── configs/
 │   └── config.yaml          # Configuration settings
 ├── data/
 │   ├── raw/
 │   │   └── netflix_titles.csv    # Source dataset
 │   └── processed/
-│       └── bi_exports/           # CSV exports for Power BI
+│       └── tableau_exports/      # CSV exports for Tableau
 ├── notebooks/
 │   ├── 00_data_exploration.ipynb    # Initial data analysis
 │   └── 01_sql_analysis.ipynb        # SQL query exploration
 ├── sql/
 │   ├── create_tables.sql     # Database schema
 │   ├── analysis_queries.sql  # Analysis queries
-│   └── aggregated_views.sql  # Power BI views
+│   └── aggregated_views.sql  # Tableau views
 ├── src/
 │   ├── __init__.py
 │   ├── 00_load_to_postgres.py    # Data loading script
 │   ├── 01_run_analysis.py        # Analysis execution
-│   ├── 02_export_for_powerbi.py  # Power BI export
+│   ├── 02_export_for_tableau.py  # Tableau export
 │   └── utils.py                   # Utility functions
 ├── tests/
 │   └── test_data_quality.py      # Data quality tests
 └── docs/
-    ├── powerbi_build_guide.md    # Dashboard creation guide
+    ├── tableau_build_guide.md    # Dashboard creation guide
     ├── data_dictionary.md         # Dataset documentation
     └── assumptions.md             # Project assumptions
 ```
@@ -119,11 +119,11 @@ netflix-content-analytics/
 
 ### 3. Analysis
 - **SQL Queries**: Advanced analytics using PostgreSQL features
-- **Aggregated Views**: Pre-calculated metrics for Power BI
+- **Aggregated Views**: Pre-calculated metrics for Tableau
 - **Insights**: Key trends and patterns identification
 
 ### 4. Visualization
-- **CSV Export**: Structured data for Power BI consumption
+- **CSV Export**: Structured data for Tableau consumption
 - **Dashboard**: Interactive visualizations and filters
 - **Insights**: Actionable business intelligence
 
@@ -136,10 +136,10 @@ netflix-content-analytics/
 | type | TEXT | Content type (Movie/TV Show) |
 | title | TEXT | Title of the content |
 | director | TEXT | Director(s) of the content |
-| cast | TEXT | Main cast members |
+| "cast" | TEXT | Main cast members |
 | country | TEXT | Production country(ies) |
-| date_added | DATE | Date added to Netflix |
-| release_year | INTEGER | Original release year |
+| date_added | DATE | Date when the content was added to Netflix |
+| release_year | INTEGER | Year when the content was originally released |
 | rating | TEXT | Content maturity rating |
 | duration | TEXT | Duration (minutes/seasons) |
 | listed_in | TEXT | Genres and categories |
@@ -174,7 +174,7 @@ netflix-content-analytics/
 - Temporal viewing patterns
 - Geographic preferences
 
-## Power BI Dashboard
+## Tableau Dashboard
 
 ### Dashboard Pages
 1. **Content Overview**: Genre distribution, content types, top countries
@@ -216,9 +216,9 @@ Edit `configs/config.yaml` to customize:
 ## Troubleshooting
 
 ### Common Issues
-1. **Database Connection**: Ensure Docker is running and PostgreSQL is accessible
+1. **Database Connection**: Ensure PostgreSQL is running and accessible
 2. **Data Loading**: Check CSV file path and database permissions
-3. **Power BI Import**: Verify CSV file formats and data types
+3. **Tableau Import**: Verify CSV file formats and data types
 4. **Performance**: Optimize database queries for large datasets
 
 ### Getting Help
@@ -244,9 +244,9 @@ This project is for educational and portfolio purposes. The Netflix dataset is s
 This project demonstrates:
 - **Data Engineering**: ETL pipelines, database design, data quality
 - **Data Analysis**: SQL analytics, statistical analysis, business insights
-- **Data Visualization**: Power BI dashboards, interactive analytics
+- **Data Visualization**: Tableau dashboards, interactive analytics
 - **Project Management**: Documentation, testing, reproducible workflows
-- **Technical Skills**: Python, PostgreSQL, Docker, Power BI
+- **Technical Skills**: Python, PostgreSQL, Tableau Public
 
 ## Next Steps
 
@@ -254,7 +254,7 @@ This project demonstrates:
 2. **Enhanced Analytics**: Add machine learning and predictive modeling
 3. **Real-time Updates**: Implement live database connections
 4. **Additional Sources**: Integrate viewership and rating data
-5. **Advanced Visualizations**: Create custom Power BI visuals
+5. **Advanced Visualizations**: Create custom Tableau calculations
 
 ## Contact
 

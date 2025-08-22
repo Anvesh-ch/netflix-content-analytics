@@ -8,8 +8,9 @@ database:
 data:
   raw_csv: data/raw/netflix_titles.csv
   processed_dir: data/processed
-  bi_exports_dir: data/processed/bi_exports
+  bi_exports_dir: data/processed/tableau_exports
 
 analysis:
   output_format: csv
   include_visualizations: true
+  dashboard_type: tableau

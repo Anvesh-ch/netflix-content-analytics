@@ -1,0 +1,9 @@
+content_type,duration_category,count
+Movie,1.5-2 hours,3092
+Movie,1-1.5 hours,1380
+Movie,Over 2 hours,1198
+Movie,Under 1 hour,458
+TV Show,1 Season,1793
+TV Show,2-3 Seasons,624
+TV Show,4-6 Seasons,193
+TV Show,7+ Seasons,66
